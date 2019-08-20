@@ -1,0 +1,7 @@
+
+#pragma once
+
+#include <libsalt/salt_Macros.hpp>
+#include <libsalt/salt_Types.hpp>
+
+#include <libsalt/salt_err.hpp>
