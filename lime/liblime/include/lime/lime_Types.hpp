@@ -1,9 +1,9 @@
 
 #pragma once
 #include <switch_min.h>
-#include <libsalt/salt_Macros.hpp>
+#include <lime/lime_Macros.hpp>
 
-namespace salt
+namespace lime
 {
 	typedef u64 Result;
 }

@@ -16,7 +16,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 # DATA is a list of directories containing data files
 # INCLUDES is a list of directories containing header files
 #---------------------------------------------------------------------------------
-TARGET		:=	DemoInjection
+TARGET		:=	LimeMain
 BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	data
@@ -37,7 +37,7 @@ CFLAGS	+=	$(INCLUDE) -DSWITCH
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++17
 
 ASFLAGS	:=	-g $(ARCH)
-LDFLAGS	=	-specs=$(TOPDIR)/../salt/link/link.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
+LDFLAGS	=	-specs=$(TOPDIR)/../lime/link/link.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
 LIBS	:= -lnx_min
 
@@ -45,7 +45,7 @@ LIBS	:= -lnx_min
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:= $(CURDIR)/../salt/libnx_min
+LIBDIRS	:= $(CURDIR)/../lime/libnx_min
 
 
 #---------------------------------------------------------------------------------
@@ -55,8 +55,8 @@ LIBDIRS	:= $(CURDIR)/../salt/libnx_min
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
 
-INCLUDES	+=	../salt/libsalt/include ../salt/libsalt/include/libsalt
-SOURCES		+=	../salt/libsalt/source ../salt/libsalt/source/libsalt
+INCLUDES	+=	../lime/liblime/include ../lime/liblime/include/lime ../lime/liblime/include/saltysd ../lime/liblime/include/lime/err 
+SOURCES		+=	../lime/liblime/source ../lime/liblime/source/lime
 
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 export TOPDIR	:=	$(CURDIR)

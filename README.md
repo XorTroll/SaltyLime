@@ -1,50 +1,30 @@
-# Salt
+# SaltyLime
 
-> Execute your own code under an official game, with full SDK symbols' access!
+> Execute your own code under an official game, with full SDK symbol access!
 
-Salt (temporary name) is a SaltyNX plugin replacing every official application's entrypoint function, **`nnMain`**.
+SaltyLime (temporary name) is a SaltyNX plugin replacing every official application's entrypoint function, **`nnMain`**.
 
 This way, the actual code the application would normally run is replaced by your own code, and since the SDK libraries' initialization happens before calling `nnMain`, there is nothing to worry about initialization.
 
 ## Structure
 
-Salt "libraries" are headers/sources inside `/salt/libsalt` directory, which are automatically compiled along with the injection project's sources.
+SaltyLime "libraries" are headers/sources inside `/lime/liblime` directory, which are automatically compiled along with the injection project's sources.
 
-Salt also uses custom libnx (used by other SaltyNX plugins as well) named `libnx_min` and custom linker scripts.
-
-## Custom heap
-
-You can always define `SALT_RUNTIME_HEAP` macro, which will indicate runtime code how much heap to use.
+SaltyLime also uses custom libnx (used by other SaltyNX plugins as well) named `libnx_min` and custom linker scripts.
 
 ## Libraries
 
-Salt's libraries (`salt::` namespace) consist on aliases for official SDK code. Example of how the code sets them internally (using macros to simplify the process)
-
-```cpp
-extern "C" // We use C-linkage of the functions to be precise with their symbols
-{
-    // (nn::Result struct's size is u64)
-    // Original function would be: nn::Result nn::err::ShowError(nn::Result error)
-    extern u64 _ZN2nn3err9ShowErrorENS_6ResultE(u64 error) __attribute__((weak));
-}
-
-// Then later, using C++'s aliasing create a more good-looking alias for the function
-
-namespace salt
-{
-    namespace err
-    {
-        const auto &ShowError = _ZN2nn3err9ShowErrorENS_6ResultE;
-    }
-}
-
-void saltMain() // Later, in main code
-{
-    salt::err::ShowError(0xDEAD); // Will prompt error window with result 0xDEAD -> 2173-0111
-}
-```
+SaltyLime's libraries (`lime::` namespace) consist on aliases for official SDK code. See more [here](SYMBOLS.md)
 
 The libraries are a WIP (need to add every symbol like this), so don't expect it to be fully featured.
+
+### Custom heap
+
+You can always define `LIME_RUNTIME_HEAP` macro, which will indicate runtime code how much heap to use.
+
+### Custom replacements
+
+You can always override `void limeSaltyRuntime()` and use `lime::salty::*` functions to replace custom functions
 
 ## Credits
 

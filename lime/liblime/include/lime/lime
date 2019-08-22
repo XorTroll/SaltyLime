@@ -1,0 +1,7 @@
+
+#pragma once
+
+#include <lime/lime_Macros.hpp>
+#include <lime/lime_Types.hpp>
+
+#include <lime/err/err_Common.hpp>
