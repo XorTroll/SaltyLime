@@ -2,6 +2,8 @@
 
 > Execute your own code under an official game, with full SDK symbol access!
 
+## **IMPORTANT!** this project is no longer continued.
+
 SaltyLime (temporary name) is a SaltyNX plugin replacing every official application's entrypoint function, **`nnMain`**.
 
 This way, the actual code the application would normally run is replaced by your own code, and since the SDK libraries' initialization happens before calling `nnMain`, there is nothing to worry about initialization.
